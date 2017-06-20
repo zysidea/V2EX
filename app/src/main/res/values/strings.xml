@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">V2EX</string>
+    <string name="title_home">首页</string>
+    <string name="title_node">节点</string>
+    <string name="title_account">我的</string>
+
+
+    <string-array name="node">
+        <item>全部</item>
+        <item>技术</item>
+        <item>创意</item>
+        <item>好玩</item>
+        <item>Apple</item>
+        <item>酷工作</item>
+        <item>交易</item>
+        <item>城市</item>
+        <item>问与答</item>
+        <item>最热</item>
+        <item>R2</item>
+        <item>关注</item>
+    </string-array>
+</resources>
