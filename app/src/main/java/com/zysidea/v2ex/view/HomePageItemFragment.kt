@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 
 /**
- * Created by zys on 17-6-19.
+ * Created by zys on 17-6-20.
  */
-class NodeFragment():BaseFragment(){
+class HomePageItemFragment :BaseFragment(){
 
     override fun setLayout(layoutId: Int) {
         super.setLayout(layoutId)
