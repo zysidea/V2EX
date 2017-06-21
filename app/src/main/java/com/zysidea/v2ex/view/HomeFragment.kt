@@ -3,7 +3,6 @@ package com.zysidea.v2ex.view
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -20,7 +19,6 @@ class HomeFragment : BaseFragment() {
     private var mTabLayout: TabLayout? = null
     private var mViewPager: ViewPager? = null
     private var mContext:Context?=null
-    private var mList:List<FragmentManager> = null
 
     override fun setLayout(layoutId: Int) {
         super.setLayout(R.layout.fragment_home)
@@ -47,7 +45,6 @@ class HomeFragment : BaseFragment() {
         mTabLayout=view.findViewById(R.id.tablayout)
         mViewPager=view.findViewById(R.id.viewpager)
         init()
-
     }
 
     override fun activityCreated(savedInstanceState: Bundle?) {

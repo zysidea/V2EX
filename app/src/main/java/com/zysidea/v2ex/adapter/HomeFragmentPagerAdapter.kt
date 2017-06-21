@@ -12,37 +12,38 @@ import com.zysidea.v2ex.view.HomePageItemFragment
 /**
  * Created by zys on 17-6-20.
  */
-class HomeFragmentPagerAdapter(fm: FragmentManager, val context: Context?): FragmentPagerAdapter(fm){
+class HomeFragmentPagerAdapter(fm: FragmentManager, val context: Context?) : FragmentPagerAdapter(fm) {
 
-    private val mNodeTitles:Array<String>
-    private var mCurrentFragment: Fragment?=null
+    private val mNodeTitles: Array<String>
+    private var mCurrentFragment: Fragment? = null
 
     init {
-        mNodeTitles=context!!.resources.getStringArray(R.array.node)
+        mNodeTitles = context!!.resources.getStringArray(R.array.node)
     }
 
     override fun getItem(position: Int): Fragment {
-        return Fragment.instantiate(context,"com.zysidea.v2ex.HomePageItemFragment",getBundle())
+        return Fragment.instantiate(context, HomePageItemFragment::class.java.name, getBundle())
     }
 
     override fun setPrimaryItem(container: ViewGroup?, position: Int, `object`: Any?) {
-        mCurrentFragment=`object` as Fragment
+        mCurrentFragment = `object` as Fragment
         super.setPrimaryItem(container, position, `object`)
     }
 
     override fun getCount(): Int {
-       return mNodeTitles!!.size
+        return mNodeTitles!!.size
     }
 
     override fun getPageTitle(position: Int): CharSequence {
         return mNodeTitles[position]
     }
 
-    fun getCurrentFragment(): Fragment?{
+    fun getCurrentFragment(): Fragment? {
         return mCurrentFragment
     }
 
-    private fun getBundle():Bundle{
-
+    private fun getBundle(): Bundle {
+        val bundle = Bundle()
+        return bundle
     }
 }
