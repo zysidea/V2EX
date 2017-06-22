@@ -12,14 +12,16 @@ import com.zysidea.v2ex.view.HomePageItemFragment
 /**
  * Created by zys on 17-6-20.
  */
-class HomeFragmentPagerAdapter(fm: FragmentManager, val context: Context?) : FragmentPagerAdapter(fm) {
+class HomeFragmentPagerAdapter(fm: FragmentManager, val context: Context?,private val currentPos: Int) : FragmentPagerAdapter(fm) {
 
-    private val mNodeTitles: Array<String>
+    private val mNodes: Array<String>
     private var mCurrentFragment: Fragment? = null
 
     init {
-        mNodeTitles = context!!.resources.getStringArray(R.array.node)
+        mNodes = context!!.resources.getStringArray(R.array.node)
     }
+
+
 
     override fun getItem(position: Int): Fragment {
         return Fragment.instantiate(context, HomePageItemFragment::class.java.name, getBundle())
@@ -31,11 +33,11 @@ class HomeFragmentPagerAdapter(fm: FragmentManager, val context: Context?) : Fra
     }
 
     override fun getCount(): Int {
-        return mNodeTitles!!.size
+        return mNodes!!.size
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        return mNodeTitles[position]
+        return mNodes[position]
     }
 
     fun getCurrentFragment(): Fragment? {
@@ -44,6 +46,7 @@ class HomeFragmentPagerAdapter(fm: FragmentManager, val context: Context?) : Fra
 
     private fun getBundle(): Bundle {
         val bundle = Bundle()
+        bundle.putString("node",getPageTitle(currentPos) as String)
         return bundle
     }
 }
