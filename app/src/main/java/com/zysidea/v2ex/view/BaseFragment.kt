@@ -1,5 +1,7 @@
 package com.zysidea.v2ex.view
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,16 +13,22 @@ import android.view.ViewGroup
  */
 abstract open class BaseFragment : Fragment() {
 
-    private var mLayoutId:Int=0
+    protected var mContext:Context?=null
 
-    protected open fun setLayout(layoutId: Int) {
-        this.mLayoutId =layoutId
-    }
+    protected abstract fun getLayout():Int
     protected abstract fun create()
     protected abstract fun createView(view:View)
     protected abstract fun activityCreated(savedInstanceState: Bundle?)
 
-    protected abstract fun newInstance():BaseFragment
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        mContext=context
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mContext=null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +36,7 @@ abstract open class BaseFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView=inflater!!.inflate(mLayoutId, container, false)
+        val rootView=inflater!!.inflate(getLayout(), container, false)
         createView(rootView)
         return rootView
     }

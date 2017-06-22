@@ -2,14 +2,15 @@ package com.zysidea.v2ex.view
 
 import android.os.Bundle
 import android.view.View
+import com.zysidea.v2ex.R
 
 /**
  * Created by zys on 17-6-19.
  */
-class NodeFragment():BaseFragment(){
+class NodeFragment private constructor() : BaseFragment() {
 
-    override fun setLayout(layoutId: Int) {
-        super.setLayout(layoutId)
+    override fun getLayout(): Int {
+        return R.layout.fragment_node
     }
 
     override fun create() {
@@ -23,8 +24,12 @@ class NodeFragment():BaseFragment(){
     override fun activityCreated(savedInstanceState: Bundle?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-    override fun newInstance(): BaseFragment {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    companion object {
+        fun NewInstance(): NodeFragment {
+            val fragment = NodeFragment()
+            val bundle = Bundle()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 }
