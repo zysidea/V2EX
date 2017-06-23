@@ -18,6 +18,14 @@ object API {
      */
     val API_ALL_TOPIC = "https://www.v2ex.com/api/topics/latest.json"
 
+
+    /**
+     * 所有的节点
+     * Method: GET
+     * Authentication: None
+     */
+    val API_ALL_NODE = "https://www.v2ex.com/api/nodes/all.json"
+
     /**
      * 节点信息
      * Method: GET

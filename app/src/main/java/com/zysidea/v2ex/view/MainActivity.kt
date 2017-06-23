@@ -7,11 +7,10 @@ package com.zysidea.v2ex.view
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
-import android.widget.TextView
 import com.zysidea.v2ex.R
+import com.zysidea.v2ex.view.Node.NodeFragment
+import com.zysidea.v2ex.view.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val navigation = findViewById(R.id.navigation) as BottomNavigationView
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
+        navigation.selectedItemId=R.id.navigation_home
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun switchFragment(number: Int) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        var fragment: Fragment = HomeFragment.NewInstance()
+        var fragment: BaseFragment = HomeFragment.NewInstance()
         var tag: String = "HomeFragment"
         when (number) {
             1 -> {
@@ -58,13 +57,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         val currentFragment = supportFragmentManager.findFragmentByTag(mCurrentTag)
-        if (currentFragment.tag==tag){
-            return
+        if(currentFragment!=null){
+            if(currentFragment.tag.equals(tag)){
+                return
+            }
+            fragmentTransaction.hide(currentFragment)
         }
         if (fragment.isAdded) {
             fragmentTransaction.hide(currentFragment).show(fragment)
         } else {
-            fragmentTransaction.hide(currentFragment).add(R.id.content, fragment,tag)
+            fragmentTransaction.add(R.id.content, fragment,tag)
         }
         fragmentTransaction.commit()
     }
