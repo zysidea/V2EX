@@ -19,7 +19,7 @@ class HomeFragmentPagerAdapter(fm: FragmentManager, context: Context?) : Fragmen
     }
 
     override fun getItem(position: Int): Fragment {
-        return HomePageItemFragment.NewInstance(nodes[position])
+        return HomePageItemFragment.NewInstance("全部")
     }
 
     override fun getCount(): Int {
