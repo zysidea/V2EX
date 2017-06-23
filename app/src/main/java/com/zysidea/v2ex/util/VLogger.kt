@@ -15,6 +15,9 @@ object VLogger {
         if (mDebug || TextUtils.isEmpty(message)) {
             return
         }
-        Log.d(TAG, message)
+        Log.e(TAG, message)
+    }
+    fun LogInfo(message: Int) {
+        Log.e(TAG, message.toString())
     }
 }

@@ -1,8 +1,9 @@
-package com.zysidea.v2ex.view
+package com.zysidea.v2ex.view.Node
 
 import android.os.Bundle
 import android.view.View
 import com.zysidea.v2ex.R
+import com.zysidea.v2ex.view.BaseFragment
 
 /**
  * Created by zys on 17-6-19.

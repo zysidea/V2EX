@@ -12,27 +12,29 @@ import java.nio.charset.Charset
 /**
  * Created by zys on 17-6-21.
  */
-class  GsonRequest<T>(method:Int,url:String,private val clazz: Class<T>,private val headers: Map<String, String>?,
-                      private val listener:Response.Listener<T>,private val errListener:Response.ErrorListener)
-    :Request<T>(method,url,errListener){
+class GsonRequest<T>(method: Int, url: String, private val clazz: Class<T>,
+                     private val listener: Response.Listener<T>, private val errListener: Response.ErrorListener)
+    : Request<T>(method, url, errListener) {
 
-    private var mGson:Gson
+    private var mGson: Gson
 
     init {
-        mGson=Gson()
+        mGson = Gson()
     }
 
     override fun getHeaders(): Map<String, String> {
-        return headers?:super.getHeaders()
+        val headers = HashMap<String, String>()
+        headers.put("Content-Type", "application/json; charset=utf-8")
+        return headers
     }
 
     override fun deliverResponse(response: T) {
         listener.onResponse(response)
     }
 
-    @Throws(UnsupportedEncodingException::class,JsonSyntaxException::class)
+    @Throws(UnsupportedEncodingException::class, JsonSyntaxException::class)
     override fun parseNetworkResponse(response: NetworkResponse?): Response<T> {
         val json = String(response!!.data, Charset.forName(HttpHeaderParser.parseCharset(response!!.headers)))
-        return Response.success(mGson.fromJson(json,clazz),HttpHeaderParser.parseCacheHeaders(response))
+        return Response.success(mGson.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response))
     }
 }

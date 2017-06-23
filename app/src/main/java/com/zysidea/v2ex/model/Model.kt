@@ -7,15 +7,12 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class TopicList(val dataList: List<Topic>)
-
-
 data class Topic(val id: Int,
                  val title: String,
                  val url: String,
                  val content: String,
                  @SerializedName("content_rendered") val contentRendered: String,
-                 val replies: String,
+                 val replies: Int,
                  val member: Member,
                  val node: Node,
                  val created: Long,
