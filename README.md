@@ -1,2 +1,2 @@
-# v2ex
-开源的Android版v2ex客户端
+# V2EX
+开源的Android版V2EX客户端
