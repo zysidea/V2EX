@@ -20,15 +20,14 @@ object TimeUtils{
     fun calculateTimeAgo(lastTouch:Long):String{
         val cal = Calendar.getInstance()
         val currentTime=cal.timeInMillis
-        val timeDiff =currentTime-lastTouch
-        val timeDiffs=timeDiff/1000
+        val timeDiff =currentTime/1000-lastTouch
         when{
-            timeDiffs<2->return "刚刚"
-            timeDiffs<60->return "几秒前"
-            timeDiffs<3600->return "${timeDiffs/60}分钟前"
-            timeDiffs<3600*24->return "${timeDiffs/3600}小时前"
-            timeDiffs<3600*24*30->return "${timeDiffs/(3600*24)}天前"
-            timeDiffs<3600*24*30*12->return "${timeDiffs/(3600*24*30)}天前"
+            timeDiff<2->return "刚刚"
+            timeDiff<60->return "几秒前"
+            timeDiff<3600->return "${timeDiff/60}分钟前"
+            timeDiff<3600*24->return "${timeDiff/3600}小时前"
+            timeDiff<3600*24*30->return "${timeDiff/(3600*24)}天前"
+            timeDiff<3600*24*30*12->return "${timeDiff/(3600*24*30)}天前"
             else ->{
                 val sdf=SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
                 return sdf.format(lastTouch)

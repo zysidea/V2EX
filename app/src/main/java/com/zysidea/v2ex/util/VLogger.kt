@@ -20,4 +20,7 @@ object VLogger {
     fun LogInfo(message: Int) {
         Log.e(TAG, message.toString())
     }
+    fun LogInfo(message: Long) {
+        Log.e(TAG, message.toString())
+    }
 }

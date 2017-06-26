@@ -55,6 +55,7 @@ class HomePageItemFragment : BaseFragment() {
         llm.orientation = LinearLayoutManager.VERTICAL
         recyclerView!!.layoutManager = llm
         adapter = HomePageItemAdapter(mContext!!)
+        recyclerView!!.addItemDecoration(DriverItemDecoration(LinearLayoutManager.VERTICAL,2))
         recyclerView!!.adapter = adapter
         setListener()
         getData()
@@ -88,7 +89,10 @@ class HomePageItemFragment : BaseFragment() {
                 Response.ErrorListener {
                     error ->
                     srfl!!.isRefreshing = false
-                    VLogger.LogInfo(error.message!!)
+                    if(error.message!=null){
+                        VLogger.LogInfo(error.message!!)
+                    }
+
                 }
         )
         NetRequest.getInstance(mContext!!).addToRequestQueue(request)
