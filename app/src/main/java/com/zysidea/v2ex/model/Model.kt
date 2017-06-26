@@ -21,7 +21,7 @@ data class Topic(val id: Int,
 )
 
 data class Member(val id: Int,
-                  val userName: String,
+                  @SerializedName("username") val userName: String,
                   val tagline: String,
                   @SerializedName("avatar_mini") val avatarMini: String,
                   @SerializedName("avatar_normal") val avatarNormal: String,

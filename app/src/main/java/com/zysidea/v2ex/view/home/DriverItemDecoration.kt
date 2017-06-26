@@ -40,9 +40,9 @@ class DriverItemDecoration(private val mOrientation: Int, private val mItemwidth
         val left = parent.paddingLeft
         val right = parent.measuredWidth - parent.paddingRight
 
-        val itemsize = parent.childCount
+        val itemSize = parent.childCount
 
-        for (i in 0..itemsize - 1 - 1) {
+        for (i in 0..itemSize - 1 - 1) {
             val child = parent.getChildAt(i)
             val params = child.layoutParams as RecyclerView.LayoutParams
             val top = child.bottom + params.bottomMargin

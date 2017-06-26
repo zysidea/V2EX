@@ -32,12 +32,11 @@ class HomePageItemAdapter(private val context: Context) : RecyclerView.Adapter<H
         if (dataArray == null) {
             return
         }
-        VLogger.LogInfo("onbind")
         val topic = dataArray!![position]
         val member = topic.member
         val node = topic.node
         //头像
-        val imageUrl = member.avatarNormal.removePrefix("//")
+        val imageUrl = "http:"+member.avatarNormal
         Glide.with(context).load(imageUrl).into(holder.avatar)
         //title
         holder.title.text = topic.title
@@ -47,6 +46,9 @@ class HomePageItemAdapter(private val context: Context) : RecyclerView.Adapter<H
         holder.userName.text = member.userName
         //timeago
         holder.timeAgo.text = TimeUtils.calculateTimeAgo(topic.lastTouched)
+        //replies
+        holder.replies.text=topic.replies.toString()
+
     }
 
     override fun getItemId(position: Int): Long {
@@ -63,11 +65,12 @@ class HomePageItemAdapter(private val context: Context) : RecyclerView.Adapter<H
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val avatar: ImageView
-        val title: TextView
         val node: TextView
         val userName: TextView
         val timeAgo: TextView
-        val lastReply: TextView
+        val title: TextView
+        val replies:TextView
+
 
         init {
             this.avatar =itemView.findViewById(R.id.avatar) as ImageView
@@ -75,7 +78,7 @@ class HomePageItemAdapter(private val context: Context) : RecyclerView.Adapter<H
             this.node = itemView.findViewById(R.id.node)as TextView
             this.userName = itemView.findViewById(R.id.username)as TextView
             this.timeAgo = itemView.findViewById(R.id.timeago)as TextView
-            this.lastReply = itemView.findViewById(R.id.lastreply)as TextView
+            replies=itemView.findViewById(R.id.replies) as TextView
         }
     }
 
