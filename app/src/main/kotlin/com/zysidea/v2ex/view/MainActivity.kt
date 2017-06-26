@@ -6,25 +6,25 @@ package com.zysidea.v2ex.view
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
+import android.support.design.widget.CoordinatorLayout
 import android.support.v7.app.AppCompatActivity
 import com.zysidea.v2ex.R
 import com.zysidea.v2ex.view.Node.NodeFragment
+import com.zysidea.v2ex.view.home.BottomNavigationBehavior
 import com.zysidea.v2ex.view.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
-    companion object
-
-    var mCurrentTag: String = "HomeFragment"
+    companion object var currentTag: String = "HomeFragment"
+    private var navigation:BottomNavigationView?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        navigation = findViewById(R.id.navigation) as BottomNavigationView
+        navigation!!.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation!!.selectedItemId=R.id.navigation_home
 
-        val navigation = findViewById(R.id.navigation) as BottomNavigationView
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        navigation.selectedItemId=R.id.navigation_home
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val currentFragment = supportFragmentManager.findFragmentByTag(mCurrentTag)
+        val currentFragment = supportFragmentManager.findFragmentByTag(currentTag)
         if(currentFragment!=null){
             if(currentFragment.tag.equals(tag)){
                 return

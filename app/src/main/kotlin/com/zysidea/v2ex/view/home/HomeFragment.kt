@@ -1,6 +1,8 @@
 package com.zysidea.v2ex.view.home
 
 import android.graphics.Color
+import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +19,7 @@ class HomeFragment private constructor() : BaseFragment() {
     private var toolbar: Toolbar? = null
     private var tabLayout: TabLayout? = null
     private var viewpager: ViewPager? = null
+    private var container:CoordinatorLayout?=null
 
     override fun getLayout(): Int {
         return R.layout.fragment_home
@@ -42,9 +45,10 @@ class HomeFragment private constructor() : BaseFragment() {
     }
 
     override fun createView(view: android.view.View) {
-        toolbar = view.findViewById(com.zysidea.v2ex.R.id.toolbar) as Toolbar
-        tabLayout = view.findViewById(com.zysidea.v2ex.R.id.tablayout) as TabLayout
-        viewpager = view.findViewById(com.zysidea.v2ex.R.id.viewpager) as ViewPager
+        container=view.findViewById(R.id.container) as CoordinatorLayout
+        toolbar = view.findViewById(R.id.toolbar) as Toolbar
+        tabLayout = view.findViewById(R.id.tablayout) as TabLayout
+        viewpager = view.findViewById(R.id.viewpager) as ViewPager
         init()
     }
 
