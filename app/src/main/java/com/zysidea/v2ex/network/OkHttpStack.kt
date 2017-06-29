@@ -32,14 +32,13 @@ import okhttp3.logging.HttpLoggingInterceptor
  * Created by zys on 17-6-21.
  */
 
-class OkHttpStack(private val mClient: OkHttpClient) : HurlStack() {
+class OkHttpStack() : HurlStack() {
 
     @Throws(IOException::class, AuthFailureError::class)
     override fun performRequest(request: Request<*>, additionalHeaders: Map<String, String>): HttpResponse {
 
-        var client = mClient
         val timeoutMs = request.timeoutMs
-        client = client.newBuilder()
+        val client = OkHttpClient().newBuilder()
                 .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message -> VLogger.LogInfo(message) }))
                 .connectTimeout(timeoutMs.toLong(), TimeUnit.MILLISECONDS)
                 .readTimeout(timeoutMs.toLong(), TimeUnit.MILLISECONDS)

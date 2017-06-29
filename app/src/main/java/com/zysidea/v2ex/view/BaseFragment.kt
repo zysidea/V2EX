@@ -11,7 +11,7 @@ import android.view.ViewGroup
 /**
  * Created by zys on 17-6-20.
  */
-abstract open class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
 
     protected var mContext:Context?=null
 

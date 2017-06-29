@@ -14,7 +14,7 @@ import com.zysidea.v2ex.view.home.adapter.HomeFragmentPagerAdapter
 /**
  * Created by zys on 17-6-19.
  */
-class HomeFragment private constructor() : BaseFragment() {
+class HomeFragment private constructor(private var listener: HomePageItemFragment.OnRecyclerViewScrollListener?) : BaseFragment() {
 
     private var toolbar: Toolbar? = null
     private var tabLayout: TabLayout? = null
@@ -27,8 +27,8 @@ class HomeFragment private constructor() : BaseFragment() {
 
 
     companion object {
-        fun NewInstance(): HomeFragment {
-            val fragment = HomeFragment()
+        fun NewInstance(listener: HomePageItemFragment.OnRecyclerViewScrollListener?): HomeFragment {
+            val fragment = HomeFragment(listener)
 //            val bundle = Bundle()
 //            fragment.arguments = bundle
             return fragment
@@ -59,7 +59,7 @@ class HomeFragment private constructor() : BaseFragment() {
         toolbar!!.setTitle(com.zysidea.v2ex.R.string.app_name)
         toolbar!!.setTitleTextColor(Color.WHITE)
         (mContext as AppCompatActivity).setSupportActionBar(toolbar)
-        viewpager!!.adapter = HomeFragmentPagerAdapter(childFragmentManager, mContext)
+        viewpager!!.adapter = HomeFragmentPagerAdapter(childFragmentManager, mContext,listener)
         viewpager!!.currentItem=0
         tabLayout!!.tabMode=TabLayout.MODE_SCROLLABLE
         tabLayout!!.setupWithViewPager(viewpager)
