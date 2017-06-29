@@ -6,6 +6,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.HttpHeaderParser
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import org.apache.http.protocol.HTTP
 import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
 
@@ -34,7 +35,7 @@ class GsonRequest<T>(method: Int, url: String, private val clazz: Class<T>,
 
     @Throws(UnsupportedEncodingException::class, JsonSyntaxException::class)
     override fun parseNetworkResponse(response: NetworkResponse?): Response<T> {
-        val json = String(response!!.data, Charset.forName(HttpHeaderParser.parseCharset(response!!.headers)))
+        val json = String(response!!.data, Charset.forName("UTF-8"))
         return Response.success(mGson.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response))
     }
 }

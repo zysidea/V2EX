@@ -10,7 +10,7 @@ import com.zysidea.v2ex.view.home.HomePageItemFragment
 /**
  * Created by zys on 17-6-20.
  */
-class HomeFragmentPagerAdapter(fm: FragmentManager, context: Context?) : FragmentPagerAdapter(fm) {
+class HomeFragmentPagerAdapter(fm: FragmentManager, context: Context?,private val listener: HomePageItemFragment.OnRecyclerViewScrollListener?) : FragmentPagerAdapter(fm) {
 
     private val nodes: Array<String>
 
@@ -19,7 +19,7 @@ class HomeFragmentPagerAdapter(fm: FragmentManager, context: Context?) : Fragmen
     }
 
     override fun getItem(position: Int): Fragment {
-        return HomePageItemFragment.NewInstance("全部")
+        return HomePageItemFragment.NewInstance("全部",listener)
     }
 
     override fun getCount(): Int {

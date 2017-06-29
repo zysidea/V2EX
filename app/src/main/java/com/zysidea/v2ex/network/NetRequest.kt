@@ -5,8 +5,11 @@ import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
+import com.zysidea.v2ex.util.VLogger
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by zys on 17-6-21.
@@ -37,7 +40,7 @@ class NetRequest private constructor(private val mContext: Context) {
             if (mRequestQueue == null) {
                 synchronized(NetRequest::class.java) {
                     if (mRequestQueue == null) {
-                        mRequestQueue = Volley.newRequestQueue(mContext.applicationContext, OkHttpStack(OkHttpClient()))
+                        mRequestQueue = Volley.newRequestQueue(mContext.applicationContext, OkHttpStack())
                     }
                 }
             }
@@ -47,5 +50,4 @@ class NetRequest private constructor(private val mContext: Context) {
     fun <T> addToRequestQueue(req: Request<T>) {
         requestQueue.add(req)
     }
-
 }

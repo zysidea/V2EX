@@ -19,8 +19,11 @@ import com.zysidea.v2ex.view.home.adapter.HomePageItemAdapter
 /**
  * Created by zys on 17-6-20.
  */
-class HomePageItemFragment : BaseFragment() {
+class HomePageItemFragment private constructor(private var listener:OnRecyclerViewScrollListener?): BaseFragment() {
 
+    interface OnRecyclerViewScrollListener{
+        fun onScrolled(dy:Int)
+    }
 
     private var recyclerView: RecyclerView? = null
     private var srfl: SwipeRefreshLayout? = null
@@ -29,8 +32,8 @@ class HomePageItemFragment : BaseFragment() {
 
 
     companion object {
-        fun NewInstance(node: String): HomePageItemFragment {
-            val fragment = HomePageItemFragment()
+        fun NewInstance(node: String,listener:OnRecyclerViewScrollListener?): HomePageItemFragment {
+            val fragment = HomePageItemFragment(listener)
             val bundle = Bundle()
             bundle.putString("node", node)
             fragment.arguments = bundle
@@ -68,6 +71,17 @@ class HomePageItemFragment : BaseFragment() {
     private fun setListener() {
         srfl!!.setOnRefreshListener({
             getData()
+        })
+
+        recyclerView!!.addOnScrollListener(object:RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                if (listener!=null){
+                    listener!!.onScrolled(dy)
+                }
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+            }
         })
     }
 
