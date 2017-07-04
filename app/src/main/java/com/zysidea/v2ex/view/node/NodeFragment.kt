@@ -1,4 +1,4 @@
-package com.zysidea.v2ex.view.Node
+package com.zysidea.v2ex.view.node
 
 import android.os.Bundle
 import android.view.View
