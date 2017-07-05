@@ -40,7 +40,7 @@ class HomePageItemAdapter(private val context: Context) : RecyclerView.Adapter<H
         Glide.with(context).load(imageUrl).into(holder.avatar)
         //title
         holder.title.text = topic.title
-        //node
+        //searchable
         holder.node.text = node.title
         //username
         holder.userName.text = member.userName
@@ -52,6 +52,9 @@ class HomePageItemAdapter(private val context: Context) : RecyclerView.Adapter<H
     }
 
     override fun getItemId(position: Int): Long {
+        if (dataArray==null){
+            return RecyclerView.NO_ID
+        }
         val topic = dataArray!![position]
         return topic.id.toLong()
     }

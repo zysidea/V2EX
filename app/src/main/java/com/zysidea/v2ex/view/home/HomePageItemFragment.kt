@@ -35,7 +35,7 @@ class HomePageItemFragment private constructor(private var listener:OnRecyclerVi
         fun NewInstance(node: String,listener:OnRecyclerViewScrollListener?): HomePageItemFragment {
             val fragment = HomePageItemFragment(listener)
             val bundle = Bundle()
-            bundle.putString("node", node)
+            bundle.putString("searchable", node)
             fragment.arguments = bundle
             return fragment
         }
@@ -50,7 +50,7 @@ class HomePageItemFragment private constructor(private var listener:OnRecyclerVi
     }
 
     override fun createView(view: View) {
-        node = arguments.getString("node")
+        node = arguments.getString("searchable")
         recyclerView = view.findViewById(R.id.recyclerview) as RecyclerView
         srfl = view.findViewById(R.id.srfl) as SwipeRefreshLayout
         recyclerView!!.setHasFixedSize(true)

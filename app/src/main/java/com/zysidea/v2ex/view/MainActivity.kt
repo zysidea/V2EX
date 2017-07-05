@@ -17,12 +17,13 @@ import com.zysidea.v2ex.R
 import com.zysidea.v2ex.view.node.NodeFragment
 import com.zysidea.v2ex.view.home.HomeFragment
 import com.zysidea.v2ex.view.home.HomePageItemFragment
+import com.zysidea.v2ex.view.mine.MineFragment
 
 
 class MainActivity : AppCompatActivity(), HomePageItemFragment.OnRecyclerViewScrollListener {
 
 
-    private var currentTag: String = "HomeFragment"
+    private var currentFragment: BaseFragment?=null
     private var navigation: BottomNavigationView? = null
     private var isHidden: Boolean = false
     private var translationAnimator: ViewPropertyAnimatorCompat? = null
@@ -56,28 +57,28 @@ class MainActivity : AppCompatActivity(), HomePageItemFragment.OnRecyclerViewScr
 
     private fun switchFragment(number: Int) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        var fragment: BaseFragment = HomeFragment.NewInstance(this)
-        var tag: String = "HomeFragment"
+        var fragment: BaseFragment?=null
         when (number) {
+            0->{
+                fragment=HomeFragment.NewInstance(this)
+            }
             1 -> {
                 fragment = NodeFragment.NewInstance()
-                tag = "NodeFragment"
+            }
+            2->{
+                fragment=MineFragment()
             }
         }
-
-        val currentFragment = supportFragmentManager.findFragmentByTag(currentTag)
-        if (currentFragment != null) {
-            if (currentFragment.tag.equals(tag)) {
-                return
-            }
+        if (currentFragment != null&&currentFragment!=fragment) {
             fragmentTransaction.hide(currentFragment)
         }
-        if (fragment.isAdded) {
-            fragmentTransaction.hide(currentFragment).show(fragment)
+        if (fragment!!.isAdded) {
+            fragmentTransaction.show(fragment)
         } else {
-            fragmentTransaction.add(R.id.content, fragment, tag)
+            fragmentTransaction.add(R.id.content, fragment)
         }
         fragmentTransaction.commit()
+        currentFragment=fragment
     }
 
     override fun onScrolled(dy: Int) {

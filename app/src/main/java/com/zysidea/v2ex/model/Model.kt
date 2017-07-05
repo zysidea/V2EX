@@ -14,7 +14,7 @@ data class Topic(val id: Int,
                  @SerializedName("content_rendered") val contentRendered: String,
                  val replies: Int,
                  val member: Member,
-                 val node: Node,
+                 val node: TopicNode,
                  val created: Long,
                  @SerializedName("last_modified") val lastModified: Long,
                  @SerializedName("last_touched") val lastTouched: Long
@@ -28,7 +28,7 @@ data class Member(val id: Int,
                   @SerializedName("avatar_large") val avatarLarge: String)
 
 
-data class Node(val id: Int,
+data class TopicNode(val id: Int,
                 val name: String,
                 val title: String,
                 @SerializedName("title_alternative") val titleAlternative: String,
@@ -38,3 +38,12 @@ data class Node(val id: Int,
                 @SerializedName("avatar_normal") val avatarNormal: String,
                 @SerializedName("avatar_large") val avatarLarge: String)
 
+data class Node(val id: Int,
+                val name: String,
+                val title: String,
+                @SerializedName("title_alternative") val titleAlternative: String,
+                val url: String,
+                val topics: Int,
+                val header:String,
+                val footer:String,
+                val created: Long)
